@@ -1,0 +1,6 @@
+dns.resolver
+subprocess
+pyfiglet
+requests
+argparse
+sys

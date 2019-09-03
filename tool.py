@@ -12,7 +12,6 @@ print(pyfiglet.figlet_format(f"{sys.argv[0]}"))
 p = argparse.ArgumentParser()
 p.add_argument("-u", "--url", type=str, required=True, metavar="", help="URL from target")
 p.add_argument("-w", "--wordlist", required=False, metavar="", help="WORDLIST for attack")
-p.add_argument("-f", "--flag", required=False, metavar="", help="DNS flag")
 a = p.parse_args()
 
 
@@ -29,7 +28,7 @@ def resolverIp(url):
         exit()
 
 
-def main(url, wordlist, fg):
+def main(url, wordlist):
     azul = "\033[1;94m"
     normal = "\033[0;0m"
     header = {"User-Agent":""}
@@ -72,4 +71,4 @@ def main(url, wordlist, fg):
 
 
 if __name__ == "__main__":
-    main(a.url, a.wordlist, a.flag)
+    main(a.url, a.wordlist)

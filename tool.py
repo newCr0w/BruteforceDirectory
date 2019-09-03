@@ -5,14 +5,19 @@ import requests
 import argparse
 import sys
 
+
 print(pyfiglet.figlet_format(f"{sys.argv[0]}"))
+
 
 p = argparse.ArgumentParser()
 p.add_argument("-u", "--url", type=str, required=True, metavar="", help="URL from target")
 p.add_argument("-w", "--wordlist", required=False, metavar="", help="WORDLIST for attack")
+p.add_argument("-f", "--flag", required=False, metavar="", help="DNS flag")
 a = p.parse_args()
 
+
 subprocess.check_call("clear")
+
 
 def resolverIp(url):
     try:
@@ -23,15 +28,31 @@ def resolverIp(url):
         print(f"Error: {e}")
         exit()
 
-def main(url, wordlist):
+
+def main(url, wordlist, fg):
     azul = "\033[1;94m"
     normal = "\033[0;0m"
     header = {"User-Agent":""}
+    flags = ["A","AAAA","NS", "MX"]
     newUrl = "http://" + url
     newUrlIp = resolverIp(url)
     print(pyfiglet.figlet_format(f"{sys.argv[0]}"))
     print(f"[ {newUrl} => {newUrlIp} ]\n")
-    if wordlist == "":
+    print(f"{50 * '='}")
+    for flag in flags:
+        try:
+            dns_querys = dns.resolver.query(url, flag)
+        except Exception as e:  
+            print(end="\r")
+        for dns_query in dns_querys:
+            if flag == "A":
+                print(f"A  | {dns_query}")
+            if flag == "NS":
+                print(f"NS | {dns_query}")
+            if flag == "MX":
+                print(f"MX | {dns_query}")
+    print(f"{50 * '='}\n")
+    if wordlist == None:
         wordlist = "wordlist.txt"
     try:
         lines = open(wordlist)
@@ -49,5 +70,6 @@ def main(url, wordlist):
             print(f"{azul + '[+]' + normal} {newUrl} => {http.status_code}")
     lines.close()
 
+
 if __name__ == "__main__":
-    main(a.url, a.wordlist)
+    main(a.url, a.wordlist, a.flag)

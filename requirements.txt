@@ -1,4 +1,4 @@
-dns.resolver
+pythondns
 subprocess
 pyfiglet
 requests

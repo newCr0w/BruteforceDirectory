@@ -1,6 +1,8 @@
-pythondns
+dns
 subprocess
 pyfiglet
 requests
 argparse
+time
 sys
+datetime

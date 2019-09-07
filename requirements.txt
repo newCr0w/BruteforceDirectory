@@ -1,5 +1,4 @@
 dns
-subprocess
 pyfiglet
 requests
 argparse

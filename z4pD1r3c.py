@@ -1,5 +1,4 @@
 import dns.resolver
-import subprocess
 import pyfiglet
 import requests
 import argparse
@@ -7,22 +6,10 @@ import time
 import sys
 import datetime
 
-print(pyfiglet.figlet_format(f"{sys.argv[0]}"))
-
 p = argparse.ArgumentParser()
 p.add_argument("-u", "--url", type=str, required=True, metavar="", help="URL from target")
 p.add_argument("-w", "--wordlist", required=False, metavar="", help="WORDLIST for attack")
 a = p.parse_args()
-
-subprocess.check_call("clear")
-
-number = 0
-while number != 100:
-    number += 10
-    print(f"{number}% {number * '=' + '>'}", end="\r")
-    time.sleep(0.25)
-
-subprocess.check_call("clear")  
 
 def resolverIp(url):
     try:

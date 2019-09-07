@@ -7,6 +7,4 @@ python3 -m pip install -r requirements.txt
 
 # Usage
 
---url=         |      URL of site
-
---wordlist=    |      Optional argument for wordlist file
+python3 z4pDIR3C.py
